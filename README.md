@@ -14,36 +14,3 @@ We use relay in NO (Normally Open) mode, it acts like a switch, since it is open
 When a trigger is applied it connects to COM (Common Connection) and the circuit gets closed.
 So the toggling between the appliances works using NO and COM of relay. To check if the connection is properly made, run the following code:
 
-int micPin = A0;          // pin that the mic is attached to
-int gndPin = A1;
-int powerPin = A2;
-int micValue1 = 0;  
-int micValue2 = 0; // the Microphone value
-int led1 = 13;
-boolean lightOn = false;
-
-
-void setup() {
-  pinMode(led1, OUTPUT);
-  pinMode(powerPin, OUTPUT);
-  pinMode(gndPin, OUTPUT);
-  pinMode(micPin, INPUT);
-  digitalWrite(gndPin,LOW);
-  delay(500);
-  digitalWrite(powerPin,HIGH);
-  Serial.begin(9600);  //for test the input value initialize serial
-}
-
-void loop() {
-  micValue1 = analogRead(micPin);  // read pin value
-  Serial.println(micValue1);
-  delay(1);
-  micValue2 = analogRead(micPin);
-  Serial.println(micValue2);
-  
-  if (micValue1-micValue2 > 2||micValue2-micValue1 > 2){
-  lightOn = !lightOn;
-  delay(100);
-  digitalWrite(led1, lightOn);
-  }
-} 
